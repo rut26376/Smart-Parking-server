@@ -1,4 +1,5 @@
 ﻿using BL.Api;
+using BL.Models;
 using Dal.Api;
 using Dal.Models;
 using System;
@@ -21,10 +22,12 @@ public class BlCPManagerService : IBLCPManager
         dal.Manager.Create(new Manager() { ManagerPassword = p });
     }
 
-    public List<string> GetAll() 
+    public List<BlCPManager> GetAll() 
     { 
-        List<string> list = new List<string>();
-        dal.Manager.GetManagersPasswords().ForEach(p =>list.Add(p.ManagerPassword));
+        List<BlCPManager> list = new List<BlCPManager>();
+
+        dal.Manager.GetManagersPasswords().ForEach(p =>list.Add(new BlCPManager() { 
+        Password = p.ManagerPassword,UserName = p.ManagerUserName}));
         return list;
     }
 

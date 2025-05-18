@@ -117,6 +117,9 @@ public partial class dbcontext : DbContext
             entity.Property(e => e.ManagerPassword)
                 .HasMaxLength(20)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+            entity.Property(e => e.ManagerUserName)
+                .HasMaxLength(20)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
         });
 
         modelBuilder.Entity<Payment>(entity =>

@@ -9,4 +9,5 @@ namespace BL.Models;
 public class BlCPManager
 {
     public string Password { get; set; }
+    public string UserName { get; set; }
 }

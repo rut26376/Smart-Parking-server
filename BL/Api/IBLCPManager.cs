@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace BL.Api;
 
 public interface IBLCPManager
 {
-    public List<string> GetAll();
+    public List<BlCPManager> GetAll();
     public void Create(string p);
 }

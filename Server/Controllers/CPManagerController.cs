@@ -16,7 +16,7 @@ public class CPManagerController : ControllerBase
     public CPManagerController(IBL manager) => cpmanager = manager.CPManager;
 
     [HttpGet("getAll")]
-    public List<string> GetAll() => cpmanager.GetAll();
+    public List<BlCPManager> GetAll() => cpmanager.GetAll();
     [HttpPost("addManagerPass")]
     public void AddManagerPass(string p) => cpmanager.Create(p);
 
