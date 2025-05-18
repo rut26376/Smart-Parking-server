@@ -1,0 +1,11 @@
+﻿[
+  {
+    "dailyRate": 850,
+
+    "minimumPrice": 50,
+
+    "hourPrice": 50,
+
+    "numParkingFloors": 3
+  }
+]
