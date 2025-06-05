@@ -97,9 +97,6 @@ public partial class dbcontext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(15)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.Password)
-                .HasMaxLength(10)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(10)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");

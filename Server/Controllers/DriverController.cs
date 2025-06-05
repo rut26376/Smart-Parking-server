@@ -1,4 +1,5 @@
-﻿using BL.Api;
+﻿using BL;
+using BL.Api;
 using BL.Models;
 using Dal.Models;
 using Microsoft.AspNetCore.Http;
@@ -14,15 +15,21 @@ public class DriverController : ControllerBase
 
     public DriverController(IBL manager) => driver = manager.Driver;
 
-    [HttpGet("GetDriver/{name}/{password}/{licensePlate}")]
-    public IActionResult GetDriver(string name, string password,string licensePlate)
+    [HttpGet("getAll")]
+    public async Task<List<BlDriver>> GetAll() =>await driver.GetAllDrivers();
+
+
+
+    [HttpGet("GetDriverVehicles/{name}/{password}")]
+    public IActionResult GetDriver(string name, string password)
     {
-        var d = driver.Get(name, password,licensePlate);
-        return d != null ? Ok(d) : NotFound("Not found a driver");
+        
+        var d = driver.Get(name, password);
+        return d.Result != null ? Ok(d.Result) : NotFound("Not found a driver");
     }
 
-    [HttpPost("AddDriver/{licensePlate}")]
+    [HttpPost("AddDriver")]
 
-    public string AddDriver(BlDriver d,string licensePlate) => driver.Create(d, licensePlate);
+    public string AddDriver(BlDriver d) => driver.Create(d);
 
 }

@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.Api
+namespace Dal.Api;
+
+public interface IDalCreditCards
 {
-    public interface IDalCreditCards
-    {
-        public int Create(CreditCard cc);
+    public int Create(CreditCard cc);
 
-        public List<CreditCard> GetAll();
+    public List<CreditCard> GetAll();
 
 
 
-    }
 }

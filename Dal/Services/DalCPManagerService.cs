@@ -12,10 +12,8 @@ public class DalCPManagerService : IDalCPManager
 {
     dbcontext dbcontext;
 
-    public DalCPManagerService(dbcontext data)
-    {
-        this.dbcontext = data;
-    }
+    public DalCPManagerService(dbcontext data)=> this.dbcontext = data;
+    
 
     public void Create(Manager managerPass)
     {
@@ -23,5 +21,5 @@ public class DalCPManagerService : IDalCPManager
         dbcontext.SaveChanges();
     }
 
-    public List<Manager> GetManagersPasswords() => dbcontext.Managers.ToList();
+    public List<Manager> GetManagers() => dbcontext.Managers.ToList();
 }

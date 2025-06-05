@@ -29,5 +29,5 @@ public class ParkingController : ControllerBase
     }
 
     [HttpGet("GetAllParkingPlaces/{level}")]
-    public List<BlCarParkings> GetAll(string level) => parking.GetAll(level);
+    public async Task<List<BlCarParkings>> GetAll(string level) =>await parking.GetAll(level);
 }

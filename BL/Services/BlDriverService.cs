@@ -15,33 +15,35 @@ public class BlDriverService : IBLDriver
     IDal dal;
 
     //c-tor
-    public BlDriverService(IDal dal) => this.dal = dal;
+    public BlDriverService(IDal dal)=> this.dal = dal;
+
+    
 
 
-    public BlVehicle? Get(string userName, string password, string licensePlate)
+    public async Task<BlDriver> Get(string userName, string password)
     {
-
-        var d = dal.Drivers.GetDrivers().Find(d => d.UserName == userName && d.Password == password);
-        if(d == null) 
+        Task<List<Driver>> d = dal.Drivers.GetDrivers();
+        Driver da = d.Result.Find(d => d.UserName == userName && d.Code == password);
+      
+        if (da == null)
             return null;
-        var v  = dal.Vehicle.GetAll().Find(v => v.LicensePlate == licensePlate);
-        if ( v == null)
-             v=dal.Vehicle.Create(new Vehicle() { LicensePlate = licensePlate, DriverCode = d.Code });
-        return new BlVehicle() { LicensePlate  =v.LicensePlate,DriverCode = v.DriverCode  };
-        
+        List<BlVehicle> list = new List<BlVehicle>();
+        da.Vehicles.ToList().ForEach(async v => list.Add(new BlVehicle() { DriverCode = v.DriverCode, LicensePlate = v.LicensePlate, ParkingCode = v.Routines.ToList().Find(r => r.ExitTime == null)?.ParkingCode }));
+        return new BlDriver() {Code = da.Code, Vehicles = list};
+
     }
 
-    public string Create(BlDriver d,string licensePlate)
+    public string Create(BlDriver d)
     {
         string code = "";
-        while (code == "" || dal.Drivers.GetDrivers().Exists(d => d.Code.Equals(code)))
+        while (code == "" || dal.Drivers.GetDrivers().Result.Exists(d => d.Code.Equals(code)))
         {
             code = randCode();
         }
 
-        dal.Drivers.Create(new Driver() { Name = d.Name, PhoneNumber = d.PhoneNumber, UserName = d.UserName, Password = d.Password, Code = code });
-        dal.Vehicle.Create(new Vehicle() { DriverCode = code, LicensePlate = licensePlate });
-        return code;
+        dal.Drivers.Create(new Driver() { Name = d.Name, PhoneNumber = d.PhoneNumber, UserName = d.UserName, Code = code });
+/*        dal.Vehicle.Create(new Vehicle() { DriverCode = code, LicensePlate = licensePlate });
+*/        return code;
     }
 
 
@@ -60,5 +62,18 @@ public class BlDriverService : IBLDriver
         return s;
     }
 
+    public async Task<List<BlDriver>> GetAllDrivers()
+    {
+        List<BlDriver> list = new List<BlDriver>();
 
+        dal.Drivers.GetAll().Result.ForEach(p => list.Add(new BlDriver()
+        {
+            Name = p.Name,
+            PhoneNumber = p.PhoneNumber,
+            UserName = p.UserName,
+            Code = p.Code
+
+        })) ;
+        return list;
+    }
 }

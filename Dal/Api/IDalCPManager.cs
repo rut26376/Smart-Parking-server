@@ -9,7 +9,7 @@ namespace Dal.Api;
 
 public interface IDalCPManager
 {
-   List<Manager> GetManagersPasswords();
+   List<Manager> GetManagers();
 
     void Create(Manager managerPass);
 }

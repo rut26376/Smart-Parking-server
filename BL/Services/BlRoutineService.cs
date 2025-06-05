@@ -2,13 +2,7 @@
 using Dal.Api;
 using Dal.Models;
 using Dal.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 using BL.Models;
 
 namespace BL.Services;
@@ -22,8 +16,11 @@ public class BlRoutineService : IBLRoutine
         this.dal = dal;
     }
 
-    public void Create(BlRoutine r)
+    public void Create(BlRoutine r,string driverCode)
     {
+        if (!dal.Vehicle.GetAll().ToList().Exists(v => v.LicensePlate == r.LicensePlate))
+          dal.Vehicle.Create(new Vehicle() { DriverCode = driverCode, LicensePlate = r.LicensePlate});
+        
         dal.Routines.Create(new Routine()
         { ParkingCode = r.ParkingCode, LicensePlate = r.LicensePlate, Date = DateTime.Now.Date, EntryTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) });
 
@@ -61,7 +58,7 @@ public class BlRoutineService : IBLRoutine
         }
         r.ExitTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
-        dal.Routines.Update(r);
+        dal.Routines.Update(r);   
 
         return r.TotalPayment;
 
@@ -82,7 +79,7 @@ public class BlRoutineService : IBLRoutine
     {
 
         //קריאה מקובץ json.....
-        StreamReader sr = new StreamReader("F:\\תיקייה כללית חדש\\שנה ב תשפה\\קבוצה א\\תלמידות\\ה-פרויקט של סוף שנה מירי רבקי רותי\\Project C#\\Dal\\Json\\globalDetails.json");
+        StreamReader sr = new StreamReader("D:\\רותי לוין\\parkingProject\\parking project\\server\\Dal\\Json\\globalDetails.json");
         string data = sr.ReadToEnd();
         sr.Close();
         List<globalDetails> lst = JsonSerializer.Deserialize<List<globalDetails>>(data);

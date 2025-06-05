@@ -28,8 +28,8 @@ public class RoutineController : ControllerBase
         return Ok(routine.Find(licensePlate));
     }
 
-    [HttpPost]
-    public void Create(BlRoutine r) => routine.Create(r);
+    [HttpPost("AddRoutine/{driverCode}")]
+    public void Create(BlRoutine r,string driverCode) => routine.Create(r, driverCode);
 
     [HttpGet("GetCarExists/{licensePlate}")]
     public bool carExists(string licensePlate) => routine.checkIfDoesntExist(licensePlate);

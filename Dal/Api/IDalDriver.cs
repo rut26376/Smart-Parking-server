@@ -9,7 +9,8 @@ namespace Dal.Api;
 
 public interface IDalDriver
 { 
-    public List<Driver> GetDrivers();
-   public void Create(Driver d);
+    public Task<List<Driver>> GetDrivers();
+    public Task<List<Driver>> GetAll();
+    public void Create(Driver d);
   
 }

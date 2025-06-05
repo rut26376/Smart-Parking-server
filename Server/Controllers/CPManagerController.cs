@@ -17,6 +17,10 @@ public class CPManagerController : ControllerBase
 
     [HttpGet("getAll")]
     public List<BlCPManager> GetAll() => cpmanager.GetAll();
+
+    [HttpGet("isManager/{userName}/{password}")]
+    public bool IsManager(string userName , string password) => cpmanager.IsManager(new BlCPManager() { Password=password,UserName=userName});
+
     [HttpPost("addManagerPass")]
     public void AddManagerPass(string p) => cpmanager.Create(p);
 

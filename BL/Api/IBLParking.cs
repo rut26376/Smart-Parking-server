@@ -13,5 +13,5 @@ public interface IBLParking
 
     void Update(BlParking p);
 
-    List<BlCarParkings> GetAll(string level);
+    Task<List<BlCarParkings>> GetAll(string level);
 }

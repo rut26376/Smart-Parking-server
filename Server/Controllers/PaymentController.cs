@@ -16,7 +16,7 @@ public class PaymentController : ControllerBase
     }
 
     [HttpGet("GetPayments")]
-    public List<BlPayment> GetAllPayments()=>payment.GetPayments();
+    public async Task<List<BlPayment>> GetAllPayments() =>await payment.GetPayments();
 
     [HttpPost("AddPayment/{licensePlate}/{numOfPayments}")]
 

@@ -9,6 +9,7 @@ namespace BL.Api;
 
 public interface IBLDriver
 {
-   BlVehicle Get(string userName, string password,string licensePlate);
-    string Create(BlDriver d,string licensePlate);
+   Task<BlDriver> Get(string userName, string password);
+   Task<List<BlDriver>> GetAllDrivers();
+    string Create(BlDriver d);
 }

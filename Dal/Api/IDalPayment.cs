@@ -9,6 +9,6 @@ namespace Dal.Api;
 
 public interface IDalPayment
 {
-    public List<Payment> GetPayments();
+     public Task<List<Payment>> GetPayments();
     public int Create(Payment p);
 }

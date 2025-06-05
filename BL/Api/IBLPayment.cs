@@ -10,6 +10,6 @@ namespace BL.Api;
 
 public interface IBLPayment
 {
-    List<BlPayment> GetPayments();
+    Task<List<BlPayment>> GetPayments();
     void Create(Shiluv shlvush, string licensePlate, int numOfPayments);
 }

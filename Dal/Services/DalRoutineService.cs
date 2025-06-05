@@ -19,8 +19,7 @@ namespace Dal.Services
 
 
         public void Create(Routine r)
-        {
-
+        { 
             dbcontext.Routines.Add(r);
             dbcontext.SaveChanges();
         }

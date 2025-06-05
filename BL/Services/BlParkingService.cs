@@ -20,18 +20,19 @@ public class BlParkingService : IBLParking
 
     public BlParking? Get(string level)
     {
-        var p = dal.Parkings.GetCarParkings().Find(p => !p.Used && p.Level == level);
+        var p = dal.Parkings.GetCarParkings().Result.Find(p => !p.Used && p.Level == level);
 
         return p != null ? new BlParking() { Code = p.Code, Col = p.Col, Level = p.Level, Row = p.Row } : null;
     }
 
-    public void Update(BlParking park)=> dal.Parkings.Update(dal.Parkings.GetCarParkings().Find(p => p.Code == park.Code));
+    public void Update(BlParking park)=> dal.Parkings.Update(dal.Parkings.GetCarParkings().Result.Find(p => p.Code == park.Code));
 
  
-    public List<BlCarParkings> GetAll(string level)
+    public async  Task<List<BlCarParkings>> GetAll(string level)
     {
 
-        var pList = dal.Parkings.GetCarParkings().FindAll(p => p.Level == level);
+        var pList = await dal.Parkings.GetCarParkings();
+           pList =  pList.FindAll(p => p.Level == level);
         List<BlCarParkings> list = new();
         pList.ForEach(p => list.Add(new BlCarParkings()
         {

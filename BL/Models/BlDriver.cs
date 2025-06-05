@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ public class BlDriver
 
     public string UserName { get; set; } = null!;
 
-    public string Password { get; set; } = null!;
+    public string Code { get; set; } = null!;
 
-
+    public List<BlVehicle> Vehicles { get; set; } = new List<BlVehicle>();
 }

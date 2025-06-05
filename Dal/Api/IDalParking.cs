@@ -9,7 +9,7 @@ namespace Dal.Api;
 
 public interface IDalParking
 {
-    List<CarParking> GetCarParkings();
+    Task<List<CarParking>> GetCarParkings();
 
     void Update(CarParking p);
     void Update(int code);

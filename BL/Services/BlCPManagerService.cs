@@ -22,14 +22,19 @@ public class BlCPManagerService : IBLCPManager
         dal.Manager.Create(new Manager() { ManagerPassword = p });
     }
 
-    public List<BlCPManager> GetAll() 
-    { 
+    public List<BlCPManager> GetAll()
+    {
         List<BlCPManager> list = new List<BlCPManager>();
 
-        dal.Manager.GetManagersPasswords().ForEach(p =>list.Add(new BlCPManager() { 
-        Password = p.ManagerPassword,UserName = p.ManagerUserName}));
+        dal.Manager.GetManagers().ForEach(p => list.Add(new BlCPManager()
+        {
+            Password = p.ManagerPassword,
+            UserName = p.ManagerUserName
+        }));
         return list;
     }
+
+    public bool IsManager(BlCPManager m) => dal.Manager.GetManagers().ToList().Exists(x => x.ManagerPassword == m.Password && x.ManagerUserName == m.UserName);
 
 
 }
