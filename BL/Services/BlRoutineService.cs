@@ -36,9 +36,7 @@ public class BlRoutineService : IBLRoutine
         Routine r = dal.Routines.GetRoutines().FindLast(d => d.LicensePlate == licensePlate);
         if (r == null || r.ExitTime != null) return -1;
         int numDays = 0;
-        Console.WriteLine((DateTime.Now - r.Date).Value.TotalHours - 24);
         double numHours = (DateTime.Now - r.Date).Value.TotalHours - 24 + ( 24 - r.EntryTime.Value.Hours);
-        Console.WriteLine(numDays);
         if (((numHours - (int)numHours)- r.EntryTime.Value.Minutes) * 100 > 60)
         {
             numHours++;
@@ -46,10 +44,7 @@ public class BlRoutineService : IBLRoutine
         numDays = (int)numHours / 24;
         numHours = numHours % 24;
 
-        //if (getHourPrice(numHours) == 50 && numDays == 0)
-        //    r.TotalPayment = 50;
-        //else
-        //    r.TotalPayment = (int)(getDailyRate() * numDays + (int)numHours * getHourPrice(numHours));
+        
 
         r.TotalPayment = getHourPrice(numHours);
         if(numDays > 0)
@@ -67,7 +62,7 @@ public class BlRoutineService : IBLRoutine
     private int getHourPrice(double hours)
     {
 
-        //קריאה מקובץ json.....
+        
         StreamReader sr = new StreamReader("D:\\רותי לוין\\parkingProject\\parking project\\server\\Dal\\Json\\globalDetails.json");
         string data = sr.ReadToEnd();
         sr.Close();
@@ -78,7 +73,7 @@ public class BlRoutineService : IBLRoutine
     private int getDailyRate()
     {
 
-        //קריאה מקובץ json.....
+        
         StreamReader sr = new StreamReader("D:\\רותי לוין\\parkingProject\\parking project\\server\\Dal\\Json\\globalDetails.json");
         string data = sr.ReadToEnd();
         sr.Close();

@@ -12,9 +12,6 @@ namespace Dal.Services;
 public class DalPaymentService : IDalPayment
 {
     dbcontext dbcontext;
-
-
-    //c-tor
     public DalPaymentService(dbcontext data) => dbcontext = data;
 
     public int Create(Payment p)

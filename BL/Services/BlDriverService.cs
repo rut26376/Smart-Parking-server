@@ -14,7 +14,6 @@ public class BlDriverService : IBLDriver
 {
     IDal dal;
 
-    //c-tor
     public BlDriverService(IDal dal)=> this.dal = dal;
 
     
@@ -42,8 +41,7 @@ public class BlDriverService : IBLDriver
         }
 
         dal.Drivers.Create(new Driver() { Name = d.Name, PhoneNumber = d.PhoneNumber, UserName = d.UserName, Code = code });
-/*        dal.Vehicle.Create(new Vehicle() { DriverCode = code, LicensePlate = licensePlate });
-*/        return code;
+        return code;
     }
 
 

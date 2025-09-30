@@ -12,7 +12,6 @@ public class DalVehicleService : IDalVehicles
 {
     dbcontext dbcontext;
 
-    //c-tor
     public DalVehicleService(dbcontext data)=> dbcontext = data;
     
     public Vehicle Create(Vehicle v)

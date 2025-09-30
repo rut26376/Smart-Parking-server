@@ -13,10 +13,7 @@ namespace Dal.Services
     {
         dbcontext dbcontext;
 
-        //c-tor
         public DalRoutineService(dbcontext data) => dbcontext = data;
-
-
 
         public void Create(Routine r)
         { 

@@ -15,7 +15,6 @@ public class BlPaymentService : IBLPayment
 {
     IDal dal;
 
-    //c-tor
     public BlPaymentService(IDal dal) => this.dal = dal;
     public void Create(Shiluv shalvush, string licensePlate, int numOfPayments)
     {

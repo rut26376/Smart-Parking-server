@@ -12,7 +12,6 @@ public class DalPaymentDetailsService : IDalPaymentsDetails
 {
     dbcontext dbcontext;
 
-    //c-tor
     public DalPaymentDetailsService(dbcontext data) => dbcontext = data;
 
     public void Create(PaymentsDetail pd)

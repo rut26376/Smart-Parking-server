@@ -14,7 +14,6 @@ public class BlCPManagerService : IBLCPManager
 {
     IDal dal;
 
-    //c-tor
     public BlCPManagerService(IDal dal) => this.dal = dal;
 
     public void Create(string p)
